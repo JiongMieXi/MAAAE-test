@@ -1,11 +1,7 @@
 {
-    "MyTask1": {},
-    "MyTask2": {},
-    "MyTask3": {},
-    "MyTask4": {
-        "recognition": "Custom",
-        "custom_recognition": "my_reco_222",
-        "action": "Custom",
-        "custom_action": "my_action_111"
+    "点击开始按钮": {
+        "recognition": "OCR",          // 文字识别引擎
+        "expected": "账号",            // 目标文本
+        "action": "Click"            // 执行点击操作
     }
 }
