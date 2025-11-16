@@ -116,11 +116,29 @@ jobs:
             echo "MFAAvalonia.exe not found in MFA directory"
           fi
 
+      - name: Setup Embed Python on Windows
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          python tools/ci/setup_embed_python.py
+        
+      - name: Download Python dependencies
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          ./install/python/python.exe tools/ci/download_deps.py --deps-dir install/deps
+
       - name: Install
         shell: bash
         run: |
-          python -m pip install -r ./requirements.txt
-          python ./install.py ${{ needs.meta.outputs.tag }}
+          if [[ "${{ matrix.os }}" == "win" ]]; then
+            # 在Windows上使用嵌入式Python
+            ./install/python/python.exe ./install.py ${{ needs.meta.outputs.tag }}
+          else
+            # 在其他平台上使用系统Python
+            python -m pip install -r ./requirements.txt
+            python ./install.py ${{ needs.meta.outputs.tag }}
+          fi
 
           if [[ "${{ matrix.os }}" != "android" ]]; then
             if [ -d "MFA" ]; then
