@@ -113,6 +113,10 @@ def install_chores():
         working_dir / "LICENSE",
         install_path,
     )
+    shutil.copy2(
+        working_dir / "requirements.txt",
+        install_path,
+    )
 
 def install_agent():
     shutil.copytree(
