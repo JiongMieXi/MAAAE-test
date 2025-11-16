@@ -126,6 +126,19 @@ jobs:
           fi
           cp "tools/DependencySetup_依赖库安装.bat" install/
 
+      - name: Rename MFAAvalonia and change icon
+        if: matrix.os != 'android'
+        shell: bash
+        run: |
+          echo "Processing MFAAvalonia files..."
+          
+          # 查找并重命名 MFAAvalonia.exe 为 MAAAE
+          if [ -f "MFA/MFAAvalonia.exe" ]; then
+            mv "MFA/MFAAvalonia.exe" "MFA/MAAAE.exe"
+            echo "Renamed MFAAvalonia.exe to MAAAE.exe"
+          else
+            echo "MFAAvalonia.exe not found in MFA directory"
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: MAAAE-win-${{ matrix.arch }}
@@ -189,6 +202,19 @@ jobs:
             echo "MFA directory not found on Linux, skipping copy."
           fi
 
+      - name: Rename MFAAvalonia and change icon
+        if: matrix.os != 'android'
+        shell: bash
+        run: |
+          echo "Processing MFAAvalonia files..."
+          
+          # 查找并重命名 MFAAvalonia.exe 为 MAAAE
+          if [ -f "MFA/MFAAvalonia.exe" ]; then
+            mv "MFA/MFAAvalonia.exe" "MFA/MAAAE.exe"
+            echo "Renamed MFAAvalonia.exe to MAAAE.exe"
+          else
+            echo "MFAAvalonia.exe not found in MFA directory"
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: MAAAE-linux-${{ matrix.arch }}
@@ -261,6 +287,19 @@ jobs:
             echo "MFA directory not found on macOS, skipping copy."
           fi
 
+      - name: Rename MFAAvalonia and change icon
+        if: matrix.os != 'android'
+        shell: bash
+        run: |
+          echo "Processing MFAAvalonia files..."
+          
+          # 查找并重命名 MFAAvalonia.exe 为 MAAAE
+          if [ -f "MFA/MFAAvalonia.exe" ]; then
+            mv "MFA/MFAAvalonia.exe" "MFA/MAAAE.exe"
+            echo "Renamed MFAAvalonia.exe to MAAAE.exe"
+          else
+            echo "MFAAvalonia.exe not found in MFA directory"
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: MAAAE-macos-${{ matrix.arch }}

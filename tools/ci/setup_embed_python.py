@@ -173,62 +173,33 @@ def main():
 
         print(f"使用Windows架构: {os_arch} -> {win_arch_suffix}")
 
-        download_url = f"https://www.python.org/ftp/python/{PYTHON_VERSION_TARGET}/python-{PYTHON_VERSION_TARGET}-embed-{win_arch_suffix}.zip"
-        zip_filename = f"python-{PYTHON_VERSION_TARGET}-embed-{win_arch_suffix}.zip"
-        zip_filepath = os.path.join(DEST_DIR, zip_filename)  # 下载到目标目录内再解压
+        # 使用 python-build-standalone 以获取包含 venv 的完整版本
+        pbs_arch = "x86_64" if win_arch_suffix == "amd64" else "aarch64"
+        file_name = f"cpython-{PYTHON_VERSION_TARGET}+{PYTHON_BUILD_STANDALONE_RELEASE_TAG}-{pbs_arch}-pc-windows-msvc-shared-install_only.zip"
+        download_url = f"https://github.com/indygreg/python-build-standalone/releases/download/{PYTHON_BUILD_STANDALONE_RELEASE_TAG}/{file_name}"
+        
+        temp_dir = os.path.join(os.path.dirname(DEST_DIR), "_temp_python_download")
+        os.makedirs(temp_dir, exist_ok=True)
+        zip_filepath = os.path.join(temp_dir, file_name)
 
         try:
             download_file(download_url, zip_filepath)
-            extract_zip(zip_filepath, DEST_DIR)
+            
+            # 解压到临时目录，然后移动内容
+            extract_zip(zip_filepath, temp_dir)
+            extracted_python_root = os.path.join(temp_dir, "python")
+            if os.path.isdir(extracted_python_root):
+                shutil.copytree(extracted_python_root, DEST_DIR, dirs_exist_ok=True)
+            else:
+                print(f"错误: 解压后未找到预期的 'python' 子目录于 {temp_dir}")
+                sys.exit(1)
+
         except Exception as e:
-            print(f"Windows Python 下载或解压失败: {e}")
+            print(f"Windows Python (from python-build-standalone) 下载或解压失败: {e}")
             return
         finally:
-            if os.path.exists(zip_filepath):
-                os.remove(zip_filepath)
-
-        # 修改 ._pth 文件
-        # pth 文件名格式如: python312._pth for Python 3.12.x
-        version_nodots = PYTHON_VERSION_TARGET.replace(".", "")[:3]
-        pth_filename_pattern = f"python{version_nodots}._pth"
-
-        pth_file_path = os.path.join(DEST_DIR, pth_filename_pattern)
-        if not os.path.exists(pth_file_path):
-            # 有时 embeddable zip 中 pth 文件的命名可能不带 minor version，如 python3._pth
-            # 尝试查找所有 python*._pth 文件
-            found_pth_files = [
-                f
-                for f in os.listdir(DEST_DIR)
-                if f.startswith("python") and f.endswith("._pth")
-            ]
-            if found_pth_files:
-                pth_file_path = os.path.join(DEST_DIR, found_pth_files[0])
-            else:
-                print(f"错误: 未在 {DEST_DIR} 中找到 ._pth 文件。")
-                return
-
-        print(f"正在修改 ._pth 文件: {pth_file_path}")
-        try:
-            with open(pth_file_path, "r+", encoding="utf-8") as f:
-                content = f.read()
-                # 取消注释 import site
-                content = content.replace("#import site", "import site")
-                content = content.replace(
-                    "# import site", "import site"
-                )  # 处理可能的空格
-
-                # 添加必要的相对路径 (相对于 DEST_DIR)
-                required_paths = [".", "Lib", "Lib\\site-packages", "DLLs"]
-                for p_path in required_paths:
-                    if p_path not in content.splitlines():  # 避免重复添加
-                        content += f"\n{p_path}"
-                f.seek(0)
-                f.write(content)
-                f.truncate()
-            print("._pth 文件修改完成。")
-        except Exception as e:
-            print(f"修改 ._pth 文件失败: {e}")
-            return
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
         python_executable_final_path = get_python_executable_path(DEST_DIR, os_type)
 
     elif os_type == "Darwin":  # macOS
