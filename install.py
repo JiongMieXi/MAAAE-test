@@ -114,7 +114,7 @@ def install_chores():
         install_path,
     )
     shutil.copy2(
-        working_dir / "requirements.txtrequirements.txt",
+        working_dir / "requirements.txt",
         install_path,
     )
 
