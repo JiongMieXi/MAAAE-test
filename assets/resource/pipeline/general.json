@@ -51,7 +51,7 @@
             198,
             108
         ],
-        "threshold": 0.9
+        "threshold": 0.75
     },
     "通用_确认进入主界面_ColorMatch": {
         "recognition": "ColorMatch",
