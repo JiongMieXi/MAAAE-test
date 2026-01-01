@@ -1,54 +1,22 @@
 {
-    "cases": [
+    "type": "input",
+    "label": "$目标烙痕等级",
+    "description": "请输入目标烙痕等级（数字）",
+    "inputs": [
         {
-            "name": "20级",
-            "pipeline_override": {
-                "日常_升级烙痕_选择烙痕": {
-                    "custom_recognition_param": {
-                        "target_level": 20
-                    }
-                }
-            }
-        },
-        {
-            "name": "30级",
-            "pipeline_override": {
-                "日常_升级烙痕_选择烙痕": {
-                    "custom_recognition_param": {
-                        "target_level": 30
-                    }
-                }
-            }
-        },
-        {
-            "name": "40级",
-            "pipeline_override": {
-                "日常_升级烙痕_选择烙痕": {
-                    "custom_recognition_param": {
-                        "target_level": 40
-                    }
-                }
-            }
-        },
-        {
-            "name": "60级",
-            "pipeline_override": {
-                "日常_升级烙痕_选择烙痕": {
-                    "custom_recognition_param": {
-                        "target_level": 60
-                    }
-                }
-            }
-        },
-        {
-            "name": "90级",
-            "pipeline_override": {
-                "日常_升级烙痕_选择烙痕": {
-                    "custom_recognition_param": {
-                        "target_level": 90
-                    }
-                }
+            "name": "等级",
+            "label": "$等级",
+            "description": "目标等级（如：20, 30, 40, 60, 90）",
+            "default": "20",
+            "pipeline_type": "int",
+            "verify": "^\\d+$"
+        }
+    ],
+    "pipeline_override": {
+        "日常_升级烙痕_选择烙痕": {
+            "custom_recognition_param": {
+                "target_level": "{等级}"
             }
         }
-    ]
+    }
 }
