@@ -289,7 +289,7 @@ Linux 用户可以使用 `cron` 来定时运行 `MaaPiCli`。相关方法请自�
 
 ## 软件声明
 
-- 本软件基于**[MIT License](./LICENSE)** 开源，仅供学习和交流使用。
+- 本软件代码基于 **[MIT License](./LICENSE)** 开源，仅供学习和交流使用（不包括本项目logo及默认图片资源，其版权属于[上海烛龙](https://www.aurogon.com/)-[白荆回廊](https://seed.wangyuan.com/)）。
 - 本项目基于 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 构建，开发者对框架功能进行了进一步扩展。
 - **使用须知**：
   - 本软件仅通过游戏提供的用户界面与游戏程序进行交互，不会读取或修改游戏的文件或代码。
