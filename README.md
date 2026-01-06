@@ -7,6 +7,10 @@
 <div align="center">
 
 # MAAAE
+  
+[![License](https://img.shields.io/github/license/NewWYoming/MAAAE?style=flat-square&color=4a90d9)](./LICENSE)
+[![Commit Activity](https://img.shields.io/github/commit-activity/m/NewWYoming/MAAAE?style=flat-square&color=00d4aa)](https://github.com/NewWYoming/MAAAE/commits)
+[![Stars](https://img.shields.io/github/stars/NewWYoming/MAAAE?style=flat-square&color=ffca28)](https://github.com/NewWYoming/MAAAE/stargazers)
 
 MAAAE，迁移自 **[MaaAshEchoes](https://github.com/moulai/MaaAshEchoes)** 项目（包括大部分代码和资源）。
 
@@ -14,9 +18,9 @@ MAAAE，迁移自 **[MaaAshEchoes](https://github.com/moulai/MaaAshEchoes)** 项
 
 基于 **[MaaFramework](https://github.com/MaaXYZ/MaaFramework)** 的 白荆回廊 小助手。图像技术 + 模拟控制，解放双手！
 
-本项目使用 **[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)** 作为 GUI 界面！（仅限 win-x86_64 用户可用）
+本项目使用 **[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)** 作为 GUI 界面！
 
-其他平台用户请使用命令行版本 **MaaPiCli**。
+（全平台测试中，支持Windows 10+、Linux (X11/Wayland)、macOS 10.15+）
 
 </div>
 
@@ -88,7 +92,7 @@ MAAAE，迁移自 **[MaaAshEchoes](https://github.com/moulai/MaaAshEchoes)** 项
 
 ### 下载地址
 
-前往 [Releases 页面](https://github.com/NewWYoming/MAAAE/releases) 下载适合您设备的版本。
+前往 [Releases 页面](https://github.com/NewWYoming/MAAAE/releases) 下载适合您设备的版本（建议下载latest版本）。
 
 ### Windows 用户
 
@@ -100,7 +104,7 @@ Windows 用户可以通过以下简单步骤安装和使用：
 
 **注意**：
 
-- 如果您的设备是 ARM 架构（极为罕见），请下载 `MAAAE-win-aarch64-vXXX.zip`，解压后运行 MaaPiCli.exe 即可。默认情况下，请优先选择 x86_64 版本。
+- 如果您的设备是 ARM 架构（极为罕见），请下载 `MAAAE-win-aarch64-vXXX.zip`。默认情况下，请优先选择 x86_64 版本。
   
 ### macOS 用户
 
@@ -108,13 +112,6 @@ Windows 用户可以通过以下简单步骤安装和使用：
 
 - 使用 Intel 处理器，请下载 `MAAAE-macos-x86_64-vXXX.zip`。
 - 使用 M1、M2 等 ARM 处理器，请下载 `MAAAE-macos-aarch64-vXXX.zip`。
-
-下载后，按照以下步骤运行：
-
-```bash
-chmod a+x MaaPiCli
-./MaaPiCli
-```
 
 ### Linux 用户我教
 
@@ -132,9 +129,9 @@ Linux 用户请根据您的设备处理器类型选择合适的版本并且根�
 
 2. 完成所有游戏资源的下载，登录好账号，启用自动战斗。
 
-3. 完成必要运行库的下载安装：  
+3. 完成必要运行库的下载安装：（非必须，启动时将自动检测依赖是否安装）  
   [VC++运行时库 (vc_redist)](https://aka.ms/vs/17/release/vc_redist.x64.exe)  
-  [.NET 8 SDK 或运行时](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0)
+  [.NET 10 SDK 或运行时](https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0)
 
 ### 模拟器设置要求
 
@@ -188,7 +185,7 @@ Linux 用户请根据您的设备处理器类型选择合适的版本并且根�
 
 #### Windows 用户
 
-**[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)** 支持自动更新及手动更新资源，使用【设置】→【软件更新】→检查资源/资源更新/自动更新资源即可。注意，这里“软件更新”指的是 MFAAvalonia 这个 GUI 的更新，不是 MAAAE 的更新。“资源更新”才是 MAAAE 的更新。
+**[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)** 支持自动更新及手动更新资源，使用【设置】→【软件更新】→检查资源/资源更新/自动更新资源即可。（已禁用单独更新框架及 GUI 版本以避免兼容性问题。）
 
 若右下角弹窗报错，请依次检查尝试以下内容：
 
@@ -198,7 +195,8 @@ Linux 用户请根据您的设备处理器类型选择合适的版本并且根�
 
 #### macOS/Linux 用户
 
-请重新下载最新版本并解压缩到原目录，覆盖原有文件即可。
+请尝试使用 GUI 进行更新，步骤与 Windows 一致。
+若失败，请重新下载最新版本并解压缩到原目录，覆盖原有文件即可。
 
 ## 定时运行
 
@@ -222,7 +220,7 @@ Linux 用户可以使用 `cron` 来定时运行 `MaaPiCli`。相关方法请自�
 **解决方法**：请安装以下运行时库后重试：
 
 - [VC++运行时库 (vc_redist)](https://aka.ms/vs/17/release/vc_redist.x64.exe)
-- [.NET 8 SDK 或运行时](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0)
+- [.NET 10 SDK 或运行时](https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0)
 
 ### 2. 茶憩任务运行异常，无法正确选择想要的角色
 
@@ -255,7 +253,7 @@ Linux 用户可以使用 `cron` 来定时运行 `MaaPiCli`。相关方法请自�
 
 ### 2. 烙痕升级链问题
 
-**问题**：烙痕升级任务可能无法正确识别等级最低的烙痕，并且无法自动处理需要突破的烙痕。
+**问题**：烙痕升级任务可能无法正确识别等级最低的烙痕，并且无法自动处理需要突破的烙痕。  
 **解决方法**：等待后续版本修复，临时方案是确保有足够的已突破烙痕进行升级。
 
 ## 未来规划
@@ -291,7 +289,7 @@ Linux 用户可以使用 `cron` 来定时运行 `MaaPiCli`。相关方法请自�
 
 ## 软件声明
 
-- 本软件免费开源，仅供学习和交流使用。
+- 本软件代码基于 **[MIT License](./LICENSE)** 开源，仅供学习和交流使用（不包括本项目logo及默认图片资源，其版权属于[上海烛龙](https://www.aurogon.com/)-[白荆回廊](https://seed.wangyuan.com/)）。
 - 本项目基于 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 构建，开发者对框架功能进行了进一步扩展。
 - **使用须知**：
   - 本软件仅通过游戏提供的用户界面与游戏程序进行交互，不会读取或修改游戏的文件或代码。
